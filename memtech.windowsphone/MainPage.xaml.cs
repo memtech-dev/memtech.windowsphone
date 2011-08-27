@@ -10,28 +10,48 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using memtech.windowsphone.ViewModels;
 
 namespace memtech.windowsphone
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        MainPageViewModel _viewModel;
         // Constructor
         public MainPage()
         {
             InitializeComponent();
 
-            // Set the data context of the listbox control to the sample data
-            DataContext = App.ViewModel;
+            // setup event handlers
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
+
+            // init the view model for this view
+            _viewModel = new MainPageViewModel();
+
+            // Set the data context of the listbox control to the sample data
+            DataContext = _viewModel;
         }
 
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!App.ViewModel.IsDataLoaded)
-            {
-                App.ViewModel.LoadData();
-            }
+            _viewModel.LoadNewsItems();
+        }
+
+        private void NewsItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listBox = sender as ListBox;
+            // If selected index is -1 (no selection) do nothing
+            if (listBox.SelectedIndex == -1)
+                return;
+
+            var selectedNewsItem = listBox.SelectedItem as NewsItem;            
+
+            // navigate to the internal web viewer
+            NavigationService.Navigate(new Uri("/Browser.xaml?uri=" + selectedNewsItem.Uri, UriKind.Relative));
+
+            // remove selection
+            listBox.SelectedIndex = -1;            
         }
     }
 }
