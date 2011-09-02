@@ -54,5 +54,19 @@ namespace memtech.windowsphone
             // remove selection
             listBox.SelectedIndex = -1;            
         }
+
+        private void MenuItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listBox = (sender as ListBox);
+            // If selected index is -1 (no selection) do nothing
+            if (listBox.SelectedIndex == -1)
+                return;
+
+            var selectedItem = listBox.SelectedItem as MenuItem;
+
+            NavigationService.Navigate(new Uri(selectedItem.Uri, UriKind.Relative));
+
+            listBox.SelectedIndex = -1;
+        }
     }
 }

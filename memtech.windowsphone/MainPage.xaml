@@ -64,15 +64,12 @@
             </controls:PanoramaItem>
             <controls:PanoramaItem Header="menu">
                 <!--Double line list with image placeholder and text wrapping-->
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Items}">
+                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding MenuItems}" SelectionChanged="MenuItem_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,17">
-                                <!--Replace rectangle with image-->
-                                <Rectangle Height="100" Width="100" Fill="#FFE5001b" Margin="12,0,9,0"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,17">                                
                                 <StackPanel Width="311">
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                    <TextBlock Text="{Binding DisplayName}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>                                    
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>

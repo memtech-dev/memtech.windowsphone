@@ -23,6 +23,7 @@ namespace memtech.windowsphone.ViewModels
     {
         public ObservableCollection<NewsItem> NewsItems { get; set; }
         public ObservableCollection<UpcomingEvent> UpcomingEvents { get; set; }
+        public ObservableCollection<MenuItem> MenuItems { get; set; }
 
         private Visibility _showNoNewsMessage = Visibility.Visible;
         public Visibility ShowNoNewsMessage
@@ -54,6 +55,9 @@ namespace memtech.windowsphone.ViewModels
 
         public MainPageViewModel()
         {
+            MenuItems = new ObservableCollection<MenuItem>();            
+            MenuItems.Add(new MenuItem { DisplayName = "#memTech", Uri = "/TwitterFeed.xaml" });
+
             NewsItems = new ObservableCollection<NewsItem>();
             UpcomingEvents = new ObservableCollection<UpcomingEvent>();
 
@@ -147,6 +151,12 @@ namespace memtech.windowsphone.ViewModels
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, e);
         }
+    }
+
+    public class MenuItem
+    {
+        public string DisplayName { get; set; }
+        public string Uri { get; set; }
     }
 
     public class NewsItem
