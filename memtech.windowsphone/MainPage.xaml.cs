@@ -16,6 +16,7 @@ namespace memtech.windowsphone
 {
     public partial class MainPage : PhoneApplicationPage
     {        
+        bool _hasLoaded = false;
         public MainPage()
         {
             InitializeComponent();
@@ -35,8 +36,12 @@ namespace memtech.windowsphone
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            App.RootViewModel.LoadNewsItems();
-            App.RootViewModel.LoadUpcomingEvents();
+            if (!_hasLoaded)
+            {
+                App.RootViewModel.LoadNewsItems();
+                App.RootViewModel.LoadUpcomingEvents();
+                _hasLoaded = true;
+            }
         }
 
         private void NewsItem_SelectionChanged(object sender, SelectionChangedEventArgs e)

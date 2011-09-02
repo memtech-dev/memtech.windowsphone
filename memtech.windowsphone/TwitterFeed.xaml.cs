@@ -17,6 +17,7 @@ namespace memtech.windowsphone
 {
     public partial class TwitterFeed : PhoneApplicationPage
     {
+        bool _hasLoaded = false;
         TwitterFeedViewModel _viewModel;
         public TwitterFeed()
         {
@@ -24,13 +25,17 @@ namespace memtech.windowsphone
 
             this.Loaded += new RoutedEventHandler(TwitterFeed_Loaded);
 
+            _viewModel = new TwitterFeedViewModel();
+            this.DataContext = _viewModel;
         }
 
         void TwitterFeed_Loaded(object sender, RoutedEventArgs e)
         {
-            _viewModel = new TwitterFeedViewModel();
-            this.DataContext = _viewModel;
-            _viewModel.LoadCurrentTweets();
+            if (!_hasLoaded)
+            {
+                _viewModel.LoadCurrentTweets();
+                _hasLoaded = true;
+            }
         }
 
         private void TwitterUser_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
