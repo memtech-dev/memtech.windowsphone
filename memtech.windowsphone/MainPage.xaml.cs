@@ -15,9 +15,7 @@ using memtech.windowsphone.ViewModels;
 namespace memtech.windowsphone
 {
     public partial class MainPage : PhoneApplicationPage
-    {
-        MainPageViewModel _viewModel;
-        // Constructor
+    {        
         public MainPage()
         {
             InitializeComponent();
@@ -26,16 +24,19 @@ namespace memtech.windowsphone
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
 
             // init the view model for this view
-            _viewModel = new MainPageViewModel();
+            // this viewmodel is static so that we can fetch items from it and not incur network cost again
+            // this is mainly for the event view
+            App.RootViewModel = new MainPageViewModel();
 
             // Set the data context of the listbox control to the sample data
-            DataContext = _viewModel;
+            DataContext = App.RootViewModel;
         }
 
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            _viewModel.LoadNewsItems();
+            App.RootViewModel.LoadNewsItems();
+            App.RootViewModel.LoadUpcomingEvents();
         }
 
         private void NewsItem_SelectionChanged(object sender, SelectionChangedEventArgs e)

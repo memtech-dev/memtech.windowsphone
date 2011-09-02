@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using memtech.windowsphone.ViewModels;
 
 namespace memtech.windowsphone
 {
@@ -22,6 +23,8 @@ namespace memtech.windowsphone
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public PhoneApplicationFrame RootFrame { get; private set; }
+
+        public static MainPageViewModel RootViewModel { get; set; }
 
         /// <summary>
         /// Constructor for the Application object.

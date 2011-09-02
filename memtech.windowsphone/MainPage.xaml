@@ -26,37 +26,41 @@
  
             <!--Panorama item one-->
             <controls:PanoramaItem Header="news">
-                <!--Double line list with text wrapping-->
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding NewsItems}" SelectionChanged="NewsItem_SelectionChanged">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Margin="0,0,0,17" Width="432">
-                                <TextBlock Text="{Binding Headline}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                <TextBlock Text="{Binding Path=Date, StringFormat='{}{0:MM/dd/yy}'}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>                                
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <StackPanel>
+                    <TextBlock x:Name="noNewsMessage" Visibility="{Binding ShowNoNewsMessage}" Style="{StaticResource PhoneTextExtraLargeStyle}">There is no news</TextBlock>
+                    <ListBox Margin="0,0,-12,0" ItemsSource="{Binding NewsItems}" SelectionChanged="NewsItem_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,17" Width="432">
+                                    <TextBlock Text="{Binding Headline}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                    <TextBlock Text="{Binding Path=Date, StringFormat='{}{0:MM/dd/yy}'}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>                                
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
             </controls:PanoramaItem>
  
             <!--Panorama item two-->
             <!--Use 'Orientation="Horizontal"' to enable a panel that lays out horizontally-->
             <controls:PanoramaItem Header="events">
-                <!--Double line list with image placeholder and text wrapping-->
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Items}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,17">
-                                <!--Replace rectangle with image-->
-                                <Rectangle Height="100" Width="100" Fill="#FFE5001b" Margin="12,0,9,0"/>
-                                <StackPanel Width="311">                                    
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                <StackPanel>
+                    <TextBlock x:Name="noEventsMessage" Visibility="{Binding ShowNoEventsMessage}" Style="{StaticResource PhoneTextExtraLargeStyle}">There are no events</TextBlock>
+                    <ListBox Margin="0,0,-12,0" ItemsSource="{Binding UpcomingEvents}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,17">
+                                    <!--Replace rectangle with image-->
+                                    <Rectangle Height="100" Width="100" Fill="#FFE5001b" Margin="12,0,9,0"/>
+                                    <StackPanel Width="311">
+                                        <TextBlock Text="{Binding Path=Date, StringFormat='{}{0:MM/dd/yy}'}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                        <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>                                    
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
             </controls:PanoramaItem>
             <controls:PanoramaItem Header="menu">
                 <!--Double line list with image placeholder and text wrapping-->
